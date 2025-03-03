@@ -13,7 +13,7 @@ export default function Header() {
           height={24}
           priority={true}
         />
-        <h1 className="sm:text-3xl text-xl font-bold ml-2 tracking-tight text-amber-500">
+        <h1 className="sm:text-3xl text-xl font-bold ml-2 tracking-tight title-gradient">
           interiordesgn.com
         </h1>
       </Link>

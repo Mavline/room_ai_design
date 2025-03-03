@@ -5,29 +5,204 @@
 
 @media (min-width: 400px) {
   .background-gradient::before {
-    background: radial-gradient(
-      20% 50% at 50% 50%,
-      rgba(245, 158, 11, 0.4) 0%,
-      rgba(20, 20, 20, 0.2) 50%,
-      rgba(0, 0, 0, 0) 100%
-    ),
-    linear-gradient(
-      135deg,
-      rgba(0, 200, 0, 0.1) 0%,
-      rgba(0, 0, 0, 0) 100%
-    );
-    z-index: -10;
     content: "";
     position: absolute;
     inset: 0px;
     transform: scale(1);
+    background: black;
     pointer-events: none;
+    z-index: -2;
   }
 }
 
 .text-gradient {
-  background: linear-gradient(to right, #f59e0b, #00ff66);
   background-clip: text;
   -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    to bottom right,
+    #8b5cf6,
+    #ec4899,
+    #f43f5e,
+    #d946ef,
+    #10b981,
+    #3b82f6,
+    #8b5cf6
+  );
+  background-size: 200% 200%;
   -webkit-text-fill-color: transparent;
+  animation: text-shimmer 8s infinite linear;
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.title-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    45deg,
+    #8b5cf6,
+    #3b82f6,
+    #10b981,
+    #f59e0b,
+    #ef4444,
+    #ec4899,
+    #8b5cf6
+  );
+  background-size: 300% auto;
+  -webkit-text-fill-color: transparent;
+  animation: title-gradient 8s linear infinite;
+}
+
+@keyframes title-gradient {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 150% center;
+  }
+  100% {
+    background-position: 300% center;
+  }
+}
+
+.text-sparkle {
+  position: relative;
+}
+
+.text-sparkle::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, white 1px, transparent 1px);
+  background-size: 4px 4px;
+  background-position: 0 0;
+  mix-blend-mode: overlay;
+  opacity: 0;
+  animation: sparkle 8s infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; }
+  25%, 75% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+.text-glow {
+  text-shadow: 0 0 5px #8b5cf6, 0 0 10px #ec4899, 0 0 15px #f43f5e;
+  animation: glow-pulse 3s infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 5px #8b5cf6, 0 0 10px #ec4899, 0 0 15px #f43f5e; }
+  50% { text-shadow: 0 0 10px #8b5cf6, 0 0 20px #ec4899, 0 0 30px #f43f5e; }
+}
+
+.purple-text {
+  color: #8b5cf6;
+}
+
+.purple-button {
+  background-color: #8b5cf6;
+  transition: 0.2s ease-in-out;
+}
+
+.purple-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #8b5cf6;
+}
+
+.starry-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes twinkle-big {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 3px currentColor; }
+  50% { box-shadow: 0 0 8px currentColor; }
+}
+
+@keyframes fall {
+  0% { transform: translateY(-5vh) translateX(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) translateX(calc(var(--fall-distance) * 1vw)) rotate(var(--fall-angle)); opacity: 0; }
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: white;
+  opacity: 0.7;
+  animation: twinkle calc(var(--star-time, 0.5) * 5s) ease-in-out infinite;
+}
+
+.big-star {
+  width: 3px;
+  height: 3px;
+  background: #f5deb3;
+  animation: 
+    twinkle-big calc(var(--star-time, 0.5) * 7s) ease-in-out infinite,
+    glow calc(var(--star-time, 0.5) * 7s) ease-in-out infinite;
+}
+
+.shooting-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--star-color, white);
+  border-radius: 50%;
+  opacity: 1;
+  transform-origin: center;
+  animation: fall var(--fall-duration, 1s) linear forwards;
+}
+
+.shooting-star::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--tail-length, 150px);
+  height: 1px;
+  background: linear-gradient(to left, transparent, var(--star-color, white));
+  transform-origin: right;
+  transform: rotate(var(--fall-angle, 45deg));
 }

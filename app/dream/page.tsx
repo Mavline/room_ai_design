@@ -218,7 +218,7 @@ export default function DreamPage() {
       <Header />
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-4 sm:mb-0 mb-8">
         <h1 className="mx-auto max-w-4xl font-display text-4xl font-bold tracking-normal text-slate-100 sm:text-6xl mb-5">
-          Create your <span className="text-amber-600">dream</span> room
+          Create your <span className="text-gradient">dream</span> room
         </h1>
         <ResizablePanel>
           <AnimatePresence mode="wait">
@@ -237,7 +237,7 @@ export default function DreamPage() {
                             alt="1 icon"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
-                          <p className="text-left font-medium text-amber-400">
+                          <p className="text-left font-medium text-gradient">
                             Choose your room theme.
                           </p>
                         </div>
@@ -258,7 +258,7 @@ export default function DreamPage() {
                             alt="1 icon"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
-                          <p className="text-left font-medium text-amber-400">
+                          <p className="text-left font-medium text-gradient">
                             Choose your room type.
                           </p>
                         </div>
@@ -277,7 +277,7 @@ export default function DreamPage() {
                             alt="1 icon"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
-                          <p className="text-left font-medium text-amber-400">
+                          <p className="text-left font-medium text-gradient">
                             Upload a picture of your room.
                           </p>
                         </div>
@@ -287,14 +287,14 @@ export default function DreamPage() {
                     {/* Правая колонка - расширенные настройки */}
                     <div className="flex-1">
                       <div className="mb-3">
-                        <h3 className="text-left text-lg font-medium text-amber-400">
+                        <h3 className="text-left text-lg font-medium text-gradient">
                           Advanced Settings
                         </h3>
                       </div>
                       
                       <div className="space-y-4 p-4 bg-gray-900 rounded-lg">
                         <div>
-                          <label className="block text-left text-sm font-medium text-amber-400 mb-2">
+                          <label className="block text-left text-sm font-medium text-gradient mb-2">
                             Custom Prompt
                           </label>
                           <textarea
@@ -308,7 +308,7 @@ export default function DreamPage() {
                         </div>
                         
                         <div>
-                          <label className="block text-left text-sm font-medium text-amber-400 mb-2">
+                          <label className="block text-left text-sm font-medium text-gradient mb-2">
                             Transformation Strength (Scale): {scale}
                           </label>
                           <div className="flex items-center space-x-2">
