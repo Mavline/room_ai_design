@@ -1,11 +1,11 @@
-import { Analytics } from "@vercel/analytics/react";
-import { Metadata } from "next";
 import "../styles/globals.css";
+import { Metadata } from "next";
+import { Toaster } from "react-hot-toast";
 
-let title = "Dream Room Generator";
-let description = "Generate your dream room in seconds.";
-let ogimage = "https://roomgpt-demo.vercel.app/og-image.png";
-let sitename = "roomGPT.io";
+let title = "AI solutions for interior design";
+let description = "Transform your space with our AI-powered interior design tool.";
+let ogimage = "/og-image.png";
+let sitename = "interiordesgn.com";
 
 export const metadata: Metadata = {
   title,
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     images: [ogimage],
     title,
     description,
-    url: "https://roomgpt-demo.vercel.app",
+    url: "https://interiordesgn.com",
     siteName: sitename,
     locale: "en_US",
     type: "website",
@@ -37,9 +37,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[#17181C] text-white">
+      <head>
+        {/* CSS is automatically included by Next.js */}
+      </head>
+      <body className="bg-black text-white">
         {children}
-        <Analytics />
+        <Toaster position="bottom-right" />
       </body>
     </html>
   );
