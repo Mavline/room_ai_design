@@ -20,7 +20,7 @@ export default function Header() {
       <div className="flex space-x-4">
         <a
           className="flex items-center justify-center rounded-full border border-green-600 text-white px-5 py-2 text-sm shadow-md hover:bg-green-500 bg-green-600 font-medium transition"
-          href="#"
+          href="https://acty.dev/"
           target="_blank"
           rel="noopener noreferrer"
         >

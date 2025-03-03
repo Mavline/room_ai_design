@@ -1,0 +1,9 @@
+# robots.txt for interiordesgn.com
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://interiordesgn.com/sitemap.xml
+
+# Our AI development partner: https://acty.dev/
+# Technology powered by: https://acty.dev/ 
