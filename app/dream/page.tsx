@@ -128,30 +128,23 @@ export default function DreamPage() {
         }),
       });
 
-      if (!res.ok) {
-        if (res.status === 429) {
-          setError("Превышен лимит запросов. Пожалуйста, попробуйте позже (примерно через 24 часа).");
-          // Закомментированный код для отображения дополнительной информации о лимите
-          // const errorData = await res.json();
-          // let errorMessage = errorData.error;
-          // 
-          // if (errorData.remaining !== undefined) {
-          //   errorMessage += ` Осталось попыток: ${errorData.remaining}.`;
-          // }
-          // 
-          // if (errorData.reset) {
-          //   const minutes = Math.ceil(errorData.reset / 60);
-          //   errorMessage += ` Попробуйте через ${minutes} минут.`;
-          // }
-          // 
-          // setError(errorMessage);
+      if (res.status === 429) {
+        try {
+          const errorData = await res.json();
+          setError(errorData.message || "Rate limit exceeded. Please try again later (after about 12 hours).");
+          setLoading(false);
+          return;
+        } catch (e) {
+          setError("Rate limit exceeded. Please try again later (after about 12 hours).");
           setLoading(false);
           return;
         }
+      }
 
+      if (!res.ok) {
         try {
           const errorData = await res.json();
-          setError(errorData.error || `Ошибка сервера: ${res.status}`);
+          setError(errorData.message || errorData.error || `Ошибка сервера: ${res.status}`);
         } catch (jsonError) {
           const errorText = await res.text();
           setError(errorText || `Ошибка сервера: ${res.status}`);
@@ -220,6 +213,12 @@ export default function DreamPage() {
         <h1 className="mx-auto max-w-4xl font-display text-4xl font-bold tracking-normal text-slate-100 sm:text-6xl mb-5">
           Create your <span className="text-gradient">dream</span> room
         </h1>
+        
+        {/* Предупреждение о лимите запросов */}
+        <div className="text-sm bg-gray-800 border border-purple-500 rounded-lg px-4 py-2 mb-6 max-w-xl text-center">
+          <span className="text-glow">⚠️</span> To maintain service quality, here is a limit of <span className="font-bold text-gradient">10 generations</span> per 12 hours for every client.
+        </div>
+        
         <ResizablePanel>
           <AnimatePresence mode="wait">
             <motion.div className="flex justify-between items-center w-full flex-col mt-4">

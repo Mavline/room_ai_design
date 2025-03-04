@@ -3,11 +3,11 @@ import redis from "../../utils/redis";
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 
-// Create a new ratelimiter, that allows 5 requests per 24 hours
+// Create a new ratelimiter, that allows 10 requests per 12 hours
 const ratelimit = redis
   ? new Ratelimit({
       redis: redis,
-      limiter: Ratelimit.fixedWindow(5, "1440 m"),
+      limiter: Ratelimit.fixedWindow(10, "720 m"),
       analytics: true,
     })
   : undefined;
@@ -24,7 +24,6 @@ export async function POST(request: Request) {
       );
     }
 
-    /* ВРЕМЕННО ОТКЛЮЧЕНО ДЛЯ РАЗРАБОТКИ
     // Rate Limiter Code
     if (ratelimit) {
       const headersList = headers();
@@ -33,26 +32,20 @@ export async function POST(request: Request) {
       const result = await ratelimit.limit(ipIdentifier ?? "");
 
       if (!result.success) {
-        // Простой ответ без дополнительных полей
+        // Информативный ответ об ограничении
         return NextResponse.json(
-          { error: "Too many uploads in 1 day. Please try again in a 24 hours." },
-          { status: 429 }
-        );
-        
-        // Закомментированная версия с дополнительными полями для отладки
-        /* return NextResponse.json(
           { 
-            error: "Too many uploads in 1 day. Please try again in a 24 hours.",
+            error: "Rate limit reached",
+            message: "You have reached the limit of 10 room generations per 12 hours. Please try again after 12 hours from your first generation. This limit helps us maintain service quality for all users.",
             limit: result.limit,
             remaining: result.remaining,
-            reset: result.reset
+            reset: result.reset,
+            resetInHours: Math.round((result.reset - Date.now()) / 3600000)
           },
           { status: 429 }
-        ); */
-    /*
+        );
       }
     }
-    */
 
     const { imageUrl, theme, room, prompt: userPrompt, customPrompt, generationType, architecture, colorPalette, scale } = await request.json();
     console.log('1. Received data:', { imageUrl, theme, room, userPrompt, customPrompt, generationType, architecture, colorPalette, scale });
