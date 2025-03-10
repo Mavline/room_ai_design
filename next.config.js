@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
+  output: 'standalone',
   images: {
     domains: ["upcdn.io", "replicate.delivery"],
   },
   // Disable automatic prefetching of all pages in the background
   experimental: {
-    optimizeCss: true, // Optimize CSS loading
+    // optimizeCss: true, // Отключаем оптимизацию CSS, так как она вызывает проблемы в Docker
   },
   // Reduce the number of unnecessary JavaScript chunks loaded
   webpack: (config, { dev, isServer }) => {
