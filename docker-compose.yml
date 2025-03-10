@@ -9,7 +9,5 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      # Переменные окружения из .env файла будут загружены через env_file
-    env_file:
-      - .env
+      # Переменные окружения будут добавлены в Railway напрямую
     restart: always

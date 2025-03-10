@@ -52,5 +52,8 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
+# Устанавливаем переменные окружения из файла .env
+# ENV VARIABLE_NAME=${VARIABLE_NAME}
+
 # Запускаем приложение
 CMD ["node", "server.js"]
